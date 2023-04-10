@@ -3,7 +3,7 @@
 require './lib/display'
 
 class Game
-  include GameDisplayHelper
+  include Display
 
   attr_accessor :board_positions, :winner, :game_over
 
@@ -32,7 +32,7 @@ class Game
 
     until @game_over
       show_board
-      message = "#{player.name}: Please choose a position from the available positions on the board."
+      message = "#{player.name}: Please choose a position from the available positions on the board.\n"
       position = prompt(message).to_i
 
       next unless available_positions.include?(position)
@@ -56,7 +56,7 @@ class Game
   end
 
   def check_if_stalemate(available_positions)
-    @game_over = available_positions.empty?
+    @game_over = true if available_positions.empty? && !@winner
   end
 
   def check_if_winner(player)
@@ -72,10 +72,6 @@ class Game
       @game_over = true
     end
   end
-end
-
-module GameDisplayHelper
-  extend Display
 
   def display_winner
     show_board
@@ -85,7 +81,7 @@ module GameDisplayHelper
       puts 'Game is a draw, no one wins'
     end
 
-    if play_again_prompt == 'Y'
+    if prompt_play_again == 'Y'
       Game.new(@player1, @player2).play
     else
       show_board
@@ -93,7 +89,7 @@ module GameDisplayHelper
     end
   end
 
-  def play_again_prompt
+  def prompt_play_again
     prompt('Would you like to play again? [Y/N]').upcase
   end
 end

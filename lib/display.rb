@@ -14,8 +14,8 @@ module Display
       |======== TIC TAC TOE ========|
       |=============================|
 
-      #{row1}   | #{@p1.game_piece}: #{@p1.score}  (#{@p1.name})
-      #{divider}   | #{@p2.game_piece}: #{@p2.score}  (#{@p2.name})
+      #{row1}   | #{@player1.game_piece}: #{@player1.score}  (#{@player1.name})
+      #{divider}   | #{@player2.game_piece}: #{@player2.score}  (#{@player2.name})
       #{row2}   *----------------
       #{divider}
       #{row3}
